@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static%}
+
+  {% block content %}
+    <div class='container my-5'>
+        <div class="jumbotron jumbotron-fluid rounded-pill ">
+        <div class="container">
+            <h3 class="display-4 text-center">Search Results</h3>
+            <p class="lead text-center">Results for the keyword searched by you are as follows...</p>
+        </div>
+        </div>
+        {% for post in queryset %}
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h4 class="font-weight-bold ml-5">
+                {{forloop.counter}}. <a href="{{ post.get_absolute_url }}">{{post.title}}</a><br>
+                </h4>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        {% endfor %}
+    </div>
+  {% endblock content%}
+

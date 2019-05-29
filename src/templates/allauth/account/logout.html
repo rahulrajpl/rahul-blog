@@ -1,0 +1,49 @@
+{% comment %} {% extends "account/base.html" %} {% endcomment %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% comment %} {% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %} {% endcomment %}
+
+<!-- Modal -->
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{% trans "Sign Out" %}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        {% get_providers as socialaccount_providers %}
+                        
+
+                      </div>
+                      <div class="modal-body">  
+                          <p>{% trans 'Are you sure you want to sign out?' %}</p>                                             
+                          <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                            {% endif %}
+                            <button type="submit">{% trans 'Sign Out' %}</button>
+                          </form> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+{% comment %} <h1>{% trans "Sign Out" %}</h1>
+
+<p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit">{% trans 'Sign Out' %}</button>
+</form> {% endcomment %}
+{% comment %} 
+
+{% endblock %} {% endcomment %}
